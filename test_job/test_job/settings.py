@@ -11,12 +11,13 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 #mongo-db
 from pymongo import MongoClient
 
-client = MongoClient('mongodb://db:27017/')
+client = MongoClient("mongodb://127.0.0.1:27017")
 db = client.mydb
+
 #mongo-db
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'admin_mongo'
 ]
 
 MIDDLEWARE = [
@@ -57,6 +59,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'test_job.urls'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
+STATIC_URL = '/static/'
+# remove STATIC_ROOT
 
 TEMPLATES = [
     {
