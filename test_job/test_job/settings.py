@@ -15,7 +15,7 @@ import os
 #mongo-db
 from pymongo import MongoClient
 
-client = MongoClient("mongodb://127.0.0.1:27017")
+client = MongoClient("mongodb://db:27017")
 db = client.mydb
 
 #mongo-db
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'admin_mongo'
 ]
 

@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import datetime
 import re
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from test_job.settings import db
 
 
@@ -38,12 +41,17 @@ class Validator:
             self.data_return[name] = 'text'
 
 
-
+@api_view(['GET', 'POST'])
 def check_form(request):
     temp_dict = dict(request.GET.items())
     val = Validator()
     for name, value in temp_dict.items():
         val.all_check(name, value.strip())
     collect = db.forms_col
-    print(list(collect.find(val.data_return)))
-    return HttpResponse('Форма подошла')
+    temp_list = list(collect.find(val.data_return))
+    if temp_list:
+        temp_dict = temp_list[0]
+        temp_dict.pop('_id')
+    else:
+        temp_dict = val.data_return
+    return Response(temp_dict)
