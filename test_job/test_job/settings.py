@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-5nc%vd61h3ti%nyp(*s_skmjv0+t_x4#%va(p#q_$@gmh9+*$f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -62,7 +62,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'test_job.urls'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "admin_mongo/static"),
 )
 STATIC_URL = '/static/'
 # remove STATIC_ROOT
@@ -100,7 +100,7 @@ DATABASES = {
 MONGODB_DATABASES = {
     'default': {
         'NAME': 'mydb',
-        'HOST': 'mongodb',
+        'HOST': 'db',
         'PORT': 27017,
         'USER': '',
         'PASSWORD': '',

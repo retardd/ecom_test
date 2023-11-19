@@ -49,6 +49,7 @@ def check_form(request):
         val.all_check(name, value.strip())
     collect = db.forms_col
     temp_list = list(collect.find(val.data_return))
+    print(temp_list)
     if temp_list:
         temp_dict = temp_list[0]
         temp_dict.pop('_id')

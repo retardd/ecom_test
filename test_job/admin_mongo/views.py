@@ -6,7 +6,7 @@ from test_job.settings import db
 def add_templates(request):
     if request.method == 'POST':
         temp_dict = dict(request.POST.items())
-        dict_to_db = {"name": temp_dict["main"]}
+        dict_to_db = {"main_name_form": temp_dict["main"]}
         temp_key = ""
         for key, value in temp_dict.items():
             if "input" in key:
@@ -20,5 +20,6 @@ def add_templates(request):
                         dict_to_db[temp_dict[temp_key]] = 'text'
                     temp_key = ""
         collect = db.forms_col
+        print(dict_to_db)
         collect.insert_one(dict_to_db)
     return render(request, 'admin.html')
