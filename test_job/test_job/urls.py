@@ -17,10 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from admin_mongo.views import add_templates
-from app.views import check_form
+from app.views import check_form, start_test
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('db/', add_templates),
     path('get_form/', check_form),
+    path('start_test/', start_test)
 ]
