@@ -3,15 +3,17 @@
 ### Docker + MongoDB (pymongo) + Django
 
 1. Рабочие страницы
-    [/db/](http://127.0.0.1/db/) - добавление новых записей в mongo
+   
+    - [/db/](http://127.0.0.1/db/) - Добавление новых записей в mongo
 
-    [/get_form/?field_name=field_info...](http://127.0.0.1/get_form/?field_name=field_info) - GET-запрос (ответ реализован через DRF)
+    - [/get_form/?field_name=field_info...](http://127.0.0.1/get_form/?field_name=field_info) - GET-запрос (ответ реализован через DRF)
 
-    [/start_test/](http://127.0.0.1/start_test/) - заполнить БД (перед этим коллекция дропается) и запустить тестовые запросы, ответ на которые выведется на странице
-                тестовые запросы и тестовые формы можно поменять в app.views.start_test 
+    - [/start_test/](http://127.0.0.1/start_test/) - Заполнить БД (перед этим коллекция дропается) и запустить тестовые запросы, ответ на которые выведется на странице
+
+    - Тестовые запросы и тестовые формы можно поменять в **app.views.start_test** 
     
    
-2. Тестовые шаблоны и запросы выглядят следующим образом: 
+3. Тестовые шаблоны и запросы выглядят следующим образом: 
     ```py
    
     def start_test(request):
@@ -44,7 +46,7 @@
     return HttpResponse("<br><br>".join(json_))
 
 
-3. Деплой
+4. Деплой
     - `docker-compose build`
     - `docker-compose up`
     - И перейти на страницу http://127.0.0.1/start_test
