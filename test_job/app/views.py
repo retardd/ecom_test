@@ -52,11 +52,18 @@ def check_form(request):
     for name, value in temp_dict.items():
         val.all_check(name, value.strip())
     collect = db.forms_col
-    temp_list = list(collect.find(val.data_return))
+    temp_list_0 = list(collect.find())
+    temp_list = []
+    for temp_json in temp_list_0:
+        temp_json.pop('_id')
+        temp_set = set(temp_json.items())
+        temp_set.discard(("name", temp_json["name"]))
+        if temp_set.issubset(set(val.data_return.items())):
+            temp_list.append(temp_json)
+    temp_list = sorted(temp_list, key=lambda d: len(d), reverse=True)
     print(temp_list)
     if temp_list:
         temp_dict = temp_list[0]
-        temp_dict.pop('_id')
     else:
         temp_dict = val.data_return
     return Response(temp_dict)
@@ -72,11 +79,11 @@ def start_test(request):
     collect.drop()
     collect.insert_many(list_dicts)
 
-    list_urls = ["http://127.0.0.1:8000/get_form/?mail1=ryazantsev@ya.ru&mail2=ryazantsev@ya.ru&mail3=ryazantsev@ya.ru",
-                 "http://127.0.0.1:8000/get_form/?mail=iovryz@grn.ru",
-                 "http://127.0.0.1:8000/get_form/?phone=+79518681525&text_filed=text",
-                 "http://127.0.0.1:8000/get_form/?phone=+79518681525",
-                 "http://127.0.0.1:8000/get_form/?phone=+79518681525&example_filed=text",
+    list_urls = ["http://127.0.0.1:8000/get_form/?mail1=ryazantsev@ya.ru&mail2=ryazantsev@ya.ru&mail3=ryazantsev@ya.ru&phone=+79806591775",
+                 "http://127.0.0.1:8000/get_form/?mail=iovryz@grn.ru&surname=ivanov",
+                 "http://127.0.0.1:8000/get_form/?phone_number=+79518676543&text_filed=text",
+                 "http://127.0.0.1:8000/get_form/?phone=+79518681667",
+                 "http://127.0.0.1:8000/get_form/?phone=+79518681667&example_filed=text",
                  "http://127.0.0.1:8000/get_form/?name_user=text&surname=text&mail=ryazantsev@mail.ru&phone=+79867612323"]
 
     json_ = []
