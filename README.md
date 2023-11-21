@@ -43,9 +43,6 @@
     
         return HttpResponse("<br><br>".join(json_))
 
-    return HttpResponse("<br><br>".join(json_))
-
-
 4. Деплой
     - `docker-compose build`
     - `docker-compose up`
